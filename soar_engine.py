@@ -62,3 +62,21 @@ print(parse_alert(alert4))
 
 print("ALERT 5:")
 print(parse_alert(alert5))
+
+def check_severity(alert):
+    severity = alert.get("severity", "low")
+    if severity == "critical":
+        print("CRITICAL THREAT DETECTED - Immediate action required!")
+    elif severity == "high":
+        print("HIGH THREAT DETECTED - Action required soon!")
+    elif severity == "medium":
+        print("MEDIUM THREAT DETECTED - Monitor closely!")
+    else:
+        print("LOW THREAT DETECTED - Log and monitor!")
+
+print("SEVERITY CHECKS:")
+check_severity(alert1)
+check_severity(alert2)
+check_severity(alert3)
+check_severity(alert4)
+check_severity(alert5)
