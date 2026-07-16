@@ -80,3 +80,20 @@ check_severity(alert2)
 check_severity(alert3)
 check_severity(alert4)
 check_severity(alert5)
+
+def extract_ip(alert):
+    ip = alert.get("ip_address", "unknown")
+    parts = ip.split(".")
+    if len(parts) == 4:
+        print("Valid IP detected: " + ip)
+        return ip
+    else:
+        print("Invalid IP address: " + ip)
+        return None
+
+print("IP EXTRACTION:")
+extract_ip(alert1)
+extract_ip(alert2)
+extract_ip(alert3)
+extract_ip(alert4)
+extract_ip(alert5)
