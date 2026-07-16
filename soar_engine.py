@@ -32,3 +32,33 @@ print(parse_alert(alert1))
 
 print("ALERT 2:")
 print(parse_alert(alert2))
+
+alert3 = {
+    "ip_address": "172.16.0.200",
+    "attack_type": "sql_injection",
+    "timestamp": "2026-07-16 12:00:00",
+    "severity": "critical"
+}
+
+alert4 = {
+    "ip_address": "192.168.1.105",
+    "attack_type": "ddos_attack",
+    "timestamp": "2026-07-16 13:00:00",
+    "severity": "high"
+}
+
+alert5 = {
+    "ip_address": "10.0.0.99",
+    "attack_type": "phishing",
+    "timestamp": "2026-07-16 14:00:00",
+    "severity": "medium"
+}
+
+print("ALERT 3:")
+print(parse_alert(alert3))
+
+print("ALERT 4:")
+print(parse_alert(alert4))
+
+print("ALERT 5:")
+print(parse_alert(alert5))
