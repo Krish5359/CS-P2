@@ -97,3 +97,28 @@ extract_ip(alert2)
 extract_ip(alert3)
 extract_ip(alert4)
 extract_ip(alert5)
+
+import logging
+
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s'
+)
+
+def log_alert(alert):
+    parsed = parse_alert(alert)
+    if parsed["severity"] == "critical":
+        logging.critical("CRITICAL ALERT: " + parsed["attack_type"] + " from IP: " + parsed["ip"])
+    elif parsed["severity"] == "high":
+        logging.warning("HIGH ALERT: " + parsed["attack_type"] + " from IP: " + parsed["ip"])
+    elif parsed["severity"] == "medium":
+        logging.info("MEDIUM ALERT: " + parsed["attack_type"] + " from IP: " + parsed["ip"])
+    else:
+        logging.info("LOW ALERT: " + parsed["attack_type"] + " from IP: " + parsed["ip"])
+
+print("ALERT LOGS:")
+log_alert(alert1)
+log_alert(alert2)
+log_alert(alert3)
+log_alert(alert4)
+log_alert(alert5)
