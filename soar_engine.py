@@ -122,3 +122,20 @@ log_alert(alert2)
 log_alert(alert3)
 log_alert(alert4)
 log_alert(alert5)
+
+def alert_summary(alerts):
+    total = len(alerts)
+    critical = sum(1 for a in alerts if a.get("severity") == "critical")
+    high = sum(1 for a in alerts if a.get("severity") == "high")
+    medium = sum(1 for a in alerts if a.get("severity") == "medium")
+    low = sum(1 for a in alerts if a.get("severity") == "low")
+
+    print("ALERT SUMMARY:")
+    print("Total Alerts: " + str(total))
+    print("Critical: " + str(critical))
+    print("High: " + str(high))
+    print("Medium: " + str(medium))
+    print("Low: " + str(low))
+
+all_alerts = [alert1, alert2, alert3, alert4, alert5]
+alert_summary(all_alerts)
