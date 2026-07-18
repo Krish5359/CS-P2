@@ -41,3 +41,35 @@ get_geolocation("172.16.0.200")
 get_geolocation("10.0.0.55")
 get_geolocation("8.8.8.8")
 get_geolocation("1.1.1.1")
+
+def calculate_risk_score(ip, severity):
+    reputation = check_ip_reputation(ip)
+    location = get_geolocation(ip)
+
+    score = 0
+
+    if reputation == "high":
+        score += 50
+    else:
+        score += 10
+
+    if severity == "critical":
+        score += 40
+    elif severity == "high":
+        score += 30
+    elif severity == "medium":
+        score += 20
+    else:
+        score += 10
+
+    if location in ["Russia", "China", "North Korea", "Iran"]:
+        score += 10
+
+    print("IP: " + ip + " Final Risk Score: " + str(score) + "/100")
+    return score
+
+print("RISK SCORE CALCULATION:")
+calculate_risk_score("192.168.1.100", "critical")
+calculate_risk_score("172.16.0.200", "high")
+calculate_risk_score("10.0.0.55", "medium")
+calculate_risk_score("8.8.8.8", "low")
