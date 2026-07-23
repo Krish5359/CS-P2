@@ -67,3 +67,44 @@ create_case("10.0.0.55", "malware_detection", "high", "IP Blocked")
 create_case("198.51.100.25", "ddos_attack", "high", "IP Monitored")
 
 show_cases()
+
+users = {
+    "krish": {"role": "analyst", "password": "analyst123"},
+    "admin": {"role": "senior_analyst", "password": "admin123"}
+}
+
+def login(username, password):
+    if username in users:
+        if users[username]["password"] == password:
+            role = users[username]["role"]
+            print("LOGIN SUCCESS: " + username + " logged in as " + role)
+            return role
+        else:
+            print("LOGIN FAILED: Wrong password!")
+            return None
+    else:
+        print("LOGIN FAILED: User not found!")
+        return None
+
+def check_permission(role, action):
+    permissions = {
+        "analyst": ["view_cases", "view_dashboard"],
+        "senior_analyst": ["view_cases", "view_dashboard", "approve_playbook", "delete_case"]
+    }
+    if action in permissions.get(role, []):
+        print("PERMISSION GRANTED: " + role + " can " + action)
+        return True
+    else:
+        print("PERMISSION DENIED: " + role + " cannot " + action)
+        return False
+
+print("ROLE BASED ACCESS CONTROL:")
+role1 = login("krish", "analyst123")
+role2 = login("admin", "admin123")
+login("hacker", "wrongpass")
+
+print("PERMISSION CHECKS:")
+check_permission(role1, "view_dashboard")
+check_permission(role1, "approve_playbook")
+check_permission(role2, "approve_playbook")
+check_permission(role2, "delete_case")
